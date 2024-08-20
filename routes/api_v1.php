@@ -14,8 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/create', [StoryController::class, 'create']);
-Route::put('/update/{id}', [StoryController::class, 'update']);
-Route::get('/get/{id}', [StoryController::class, 'find']);
-Route::get('/all', [StoryController::class, 'all']);
-Route::delete('/delete/{id}', [StoryController::class, 'delete']);
+// Route::post('stories/create', [StoryController::class, 'create']);
+// Route::put('stories/update/{id}', [StoryController::class, 'update']);
+// Route::get('stories/get/{id}', [StoryController::class, 'find']);
+// Route::get('stories/all', [StoryController::class, 'all']);
+// Route::delete('stories/delete/{id}', [StoryController::class, 'delete']);
+
+Route::resource('stories', StoryController::class);

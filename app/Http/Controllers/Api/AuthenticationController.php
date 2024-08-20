@@ -23,7 +23,9 @@ class AuthenticationController extends Controller
         return $this->ok(
             'Authenticated',
             [
-                'token' => $user->createToken('API_TOKEN for ' . $user->username)->plainTextToken
+                'token' => $user->createToken(
+                    'API_TOKEN for ' . $user->username,
+                     ['*'])->plainTextToken
             ]
         );
     }

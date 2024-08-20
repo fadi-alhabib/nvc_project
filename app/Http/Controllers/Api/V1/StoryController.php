@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Api\V1;
 
-use App\Http\Requests\CreateStoryRequest;
-use App\Http\Requests\UpdateStoryRequest;
+use App\Http\Requests\Api\V1\CreateStoryRequest;
+use App\Http\Requests\Api\V1\UpdateStoryRequest;
 use App\Http\Controllers\Controller;
 use App\Repository\Story\StoryRepositoryInterface;
 
@@ -21,17 +21,17 @@ class StoryController extends Controller
        return $this->storyRepository->update($data->toArray(), $id);
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
         return $this->storyRepository->delete($id);
     }
 
-    public function find($id)
+    public function show($id)
     {
        return $this->storyRepository->find($id);
     }
 
-    public function all()
+    public function index()
     {
         return $this->storyRepository->all();
     }

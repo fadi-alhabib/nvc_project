@@ -3,10 +3,12 @@
 namespace App\Repository\Story;
 
 use App\Models\Story;
-use App\Http\Requests\CreateStoryRequest;
+use App\Http\Requests\Api\V1\CreateStoryRequest;
+use App\Traits\ApiResponses;
 
 class StoryRepository implements StoryRepositoryInterface
 {
+    use ApiResponses;
     public function create(array $data)
     {
         $tags = $data['tags'];
@@ -19,31 +21,23 @@ class StoryRepository implements StoryRepositoryInterface
             'tags' => $data['tags']
         ];
         
-        Story::create($story)->tags()->attach($tags);
-
-        return response()->json([
-            'message' => 'story created',
-            'new_story' => $data 
-        ], 201);
+        $newStory = Story::create($story);
+        $newStory->tags()->attach($tags);
+        return $this->createdAt('Created successfuly', '/api/v1/stories/get/'.$newStory->id);
     }
 
     public function update(array $data, $id)
     {
         $story = Story::find($id);
         $story->update($data);
-        return response()->json([
-            'message' => 'story updated',
-            'new_story' => $story 
-        ], 204);
+        return $this->noContent();
     }
 
     public function delete($id)
     {
         $story = Story::find($id);
         $story->delete();
-        return response()->json([
-            'message' => 'story deleted',
-        ], 204);
+        return  $this->noContent();
     }
 
     public function find($id)
@@ -51,18 +45,16 @@ class StoryRepository implements StoryRepositoryInterface
         $story = Story::find($id);
         $story->clicks++;
         $story->save();
-        return response()->json([
-            'message' => 'story updated',
-            'new_story' => $story 
-        ], 200);
+        return $this->ok('Story retrieved', [
+            'story' => $story
+        ]);
     }
     
     public function all()
     {
         $stories = Story::all();
-        return response()->json([
-            'message' => 'story updated',
-            'stories' => $stories 
-        ], 200);
+        return $this->ok('Stories retrieved', [
+            'stories' => $stories
+        ]);
     }
 }

@@ -13,6 +13,10 @@ trait ApiResponses{
         return $this->success('No content', [], 204);
     }
 
+    protected function createdAt($message, $url){
+        return $this->success($message, $url, 201);
+    }
+
     protected function success($message, $data, $statusCode = 200){
         return response()->json([
             'message' => $message,
