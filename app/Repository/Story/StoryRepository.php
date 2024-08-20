@@ -23,7 +23,7 @@ class StoryRepository implements StoryRepositoryInterface
         
         $newStory = Story::create($story);
         $newStory->tags()->attach($tags);
-        return $this->createdAt('Created successfuly', '/api/v1/stories/get/'.$newStory->id);
+        return $this->createdAt('Created successfuly', route('stories.show', ['story' => $newStory->id]));
     }
 
     public function update(array $data, $id)
