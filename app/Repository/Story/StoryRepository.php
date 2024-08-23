@@ -4,6 +4,7 @@ namespace App\Repository\Story;
 
 use App\Models\Story;
 use App\Http\Requests\Api\V1\CreateStoryRequest;
+use App\Http\Resources\V1\StoryResource;
 use App\Traits\ApiResponses;
 
 class StoryRepository implements StoryRepositoryInterface
@@ -48,16 +49,11 @@ class StoryRepository implements StoryRepositoryInterface
         $story->tags;
         $story->clicks++;
         $story->save();
-        return $this->ok('Story retrieved', [
-            'story' => $story,
-        ]);
+        return new StoryResource($story);
     }
     
     public function all()
     {
-        $stories = Story::all();
-        return $this->ok('Stories retrieved', [
-            'stories' => $stories
-        ]);
+        return StoryResource::collection(Story::all());
     }
 }

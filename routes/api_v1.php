@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 // Route::delete('stories/delete/{id}', [StoryController::class, 'delete']);
 
 Route::resource('stories', StoryController::class);
+
 // create => GET
 // index => GET
 // show => GET
