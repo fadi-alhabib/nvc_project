@@ -6,10 +6,14 @@ use App\Http\Requests\Api\V1\CreateStoryRequest;
 use App\Http\Requests\Api\V1\UpdateStoryRequest;
 use App\Http\Controllers\Controller;
 use App\Repository\Story\StoryRepositoryInterface;
+use Illuminate\Support\Facades\Auth;
 
 class StoryController extends Controller
 {
-    public function __construct(protected StoryRepositoryInterface $storyRepository) {}
+    public function __construct(protected StoryRepositoryInterface $storyRepository)
+    {
+        $this->middleware('auth:sanctum')->only('create', 'update', 'edit', 'destroy');
+    }
         
     public function create(CreateStoryRequest $data)
     {
@@ -28,7 +32,9 @@ class StoryController extends Controller
 
     public function show($id)
     {
-       return $this->storyRepository->find($id);
+        if(request()->header('Authorization')) $hasAuthHeader = true;
+        else $hasAuthHeader = false;
+        return $this->storyRepository->find($id, $hasAuthHeader);
     }
 
     public function index()

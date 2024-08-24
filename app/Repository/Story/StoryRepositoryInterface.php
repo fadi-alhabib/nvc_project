@@ -12,7 +12,7 @@ interface StoryRepositoryInterface
 
     public function delete($id);
 
-    public function find($id);
+    public function find($id, $hasAuthHeader);
 
     public function all();
 }

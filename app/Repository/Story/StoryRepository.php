@@ -3,7 +3,7 @@
 namespace App\Repository\Story;
 
 use App\Models\Story;
-use App\Http\Requests\Api\V1\CreateStoryRequest;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\V1\StoryResource;
 use App\Traits\ApiResponses;
 
@@ -43,12 +43,15 @@ class StoryRepository implements StoryRepositoryInterface
         return  $this->noContent();
     }
 
-    public function find($id)
+    public function find($id, $hasAuthHeader)
     {
+        
         $story = Story::find($id);
         $story->tags;
-        $story->clicks++;
-        $story->save();
+        if(!$hasAuthHeader){
+            $story->clicks++;
+            $story->save();
+        }
         return new StoryResource($story);
     }
     

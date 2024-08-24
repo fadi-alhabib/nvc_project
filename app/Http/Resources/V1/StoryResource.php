@@ -30,6 +30,9 @@ class StoryResource extends JsonResource
             'links' => [
                 'self' => route('stories.show', $this->id)
             ],
+            'includes' => 
+                TagResource::collection($this->tags)
+            ,
             'relationships' =>[
                 'place' => [
                     'data' => [
