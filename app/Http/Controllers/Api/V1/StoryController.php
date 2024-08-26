@@ -6,9 +6,8 @@ use App\Http\Requests\Api\V1\CreateStoryRequest;
 use App\Http\Requests\Api\V1\UpdateStoryRequest;
 use App\Http\Controllers\Controller;
 use App\Repository\Story\StoryRepositoryInterface;
-use Illuminate\Support\Facades\Auth;
 
-class StoryController extends Controller
+class StoryController extends ApiController
 {
     public function __construct(protected StoryRepositoryInterface $storyRepository)
     {
@@ -34,7 +33,12 @@ class StoryController extends Controller
     {
         if(request()->header('Authorization')) $hasAuthHeader = true;
         else $hasAuthHeader = false;
-        return $this->storyRepository->find($id, $hasAuthHeader);
+        
+        if($this->include('place')){
+            return $this->storyRepository->find($id, $hasAuthHeader, 'place');
+        }
+
+        return $this->storyRepository->find($id, $hasAuthHeader, null);
     }
 
     public function index()

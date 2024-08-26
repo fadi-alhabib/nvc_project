@@ -27,11 +27,10 @@ class StoryResource extends JsonResource
                 'clicks' => $this->clicks,
                 'created_at' => $this->created_at
             ],
-            'links' => [
-                'self' => route('stories.show', $this->id)
-            ],
-            'includes' => 
-                TagResource::collection($this->tags)
+            'link' => $this->when(
+                    $request->routeIs('stories'),
+                    route('stories.show', $this->id)
+                )
             ,
             'relationships' =>[
                 'place' => [
@@ -40,8 +39,11 @@ class StoryResource extends JsonResource
                         'id' => $this->state_id
                     ],
                     'link' => route('states.show', $this->id)
-                ]
-            ]
+                ],
+            ],
+            'includes' => new StateResource($this->whenLoaded('state')),
+               
+            
         ];
     }
 }

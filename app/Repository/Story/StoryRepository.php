@@ -43,20 +43,25 @@ class StoryRepository implements StoryRepositoryInterface
         return  $this->noContent();
     }
 
-    public function find($id, $hasAuthHeader)
+    public function find($id, $hasAuthHeader, $relationship)
     {
-        
         $story = Story::find($id);
         $story->tags;
         if(!$hasAuthHeader){
             $story->clicks++;
             $story->save();
         }
+
+        if(isset($relationship)){
+            return new StoryResource($story->load('state'));
+        }
+
         return new StoryResource($story);
     }
+
     
     public function all()
     {
-        return StoryResource::collection(Story::all());
+        return StoryResource::collection(Story::all()/*Story::filter($filters)->paginate()*/);
     }
 }
