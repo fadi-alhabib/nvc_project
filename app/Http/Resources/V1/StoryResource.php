@@ -42,8 +42,8 @@ class StoryResource extends JsonResource
                 ],
             ],
             'includes' => [
-                'place' => new StateResource($this->whenLoaded('state')),
-                'category' => TagResource::collection($this->whenLoaded('tags'))
+                'place' => new StateResource($this->state),
+                'category' => TagResource::collection($this->tags)
             ],
         ];
     }
