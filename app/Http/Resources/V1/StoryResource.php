@@ -41,9 +41,10 @@ class StoryResource extends JsonResource
                     'link' => route('states.show', $this->id)
                 ],
             ],
-            'includes' => new StateResource($this->whenLoaded('state')),
-               
-            
+            'includes' => [
+                'place' => new StateResource($this->whenLoaded('state')),
+                'category' => TagResource::collection($this->whenLoaded('tags'))
+            ],
         ];
     }
 }

@@ -34,11 +34,7 @@ class StoryController extends ApiController
         if(request()->header('Authorization')) $hasAuthHeader = true;
         else $hasAuthHeader = false;
         
-        if($this->include('place')){
-            return $this->storyRepository->find($id, $hasAuthHeader, 'place');
-        }
-
-        return $this->storyRepository->find($id, $hasAuthHeader, null);
+        return $this->storyRepository->find($id, $hasAuthHeader);
     }
 
     public function index()
