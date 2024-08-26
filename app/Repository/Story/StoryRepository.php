@@ -3,7 +3,7 @@
 namespace App\Repository\Story;
 
 use App\Models\Story;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Filters\V1\StoryFilter; 
 use App\Http\Resources\V1\StoryResource;
 use App\Traits\ApiResponses;
 
@@ -55,8 +55,8 @@ class StoryRepository implements StoryRepositoryInterface
     }
 
     
-    public function all()
+    public function all(StoryFilter $filters)
     {
-        return StoryResource::collection(Story::paginate()/*Story::filter($filters)->paginate()*/);
+        return StoryResource::collection(Story::filter($filters)->paginate());
     }
 }

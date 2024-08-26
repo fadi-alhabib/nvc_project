@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Api\V1\StoryController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\StateController;
+use App\Http\Controllers\Api\TagController;
 
 
 
@@ -12,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 // Route::delete('stories/delete/{id}', [StoryController::class, 'delete']);
 
 Route::resource('stories', StoryController::class);
+Route::resource('states', StateController::class);
+Route::resource('tags', TagController::class);
+
 
 // create => GET
 // index => GET

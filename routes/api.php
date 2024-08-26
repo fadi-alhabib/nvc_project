@@ -1,8 +1,6 @@
 <?php
 
 use App\Http\Controllers\Api\AuthenticationController;
-use App\Http\Controllers\Api\SeededValuesController;
-use App\Http\Controllers\Api\StateController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,4 +17,3 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', [AuthenticationController::class, 'login']);
 Route::post('/logout', [AuthenticationController::class, 'logout']);
 
-Route::resource('states', StateController::class);

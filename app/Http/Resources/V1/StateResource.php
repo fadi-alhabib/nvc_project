@@ -19,7 +19,8 @@ class StateResource extends JsonResource
             'id' => $this->id,
             'attributes' => [
                 'name' => $this->name
-            ]
+            ],
+            'include' => StoryResource::collection($this->whenLoaded('stories'))
         ];
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Requests\Api\V1\CreateStoryRequest;
 use App\Http\Requests\Api\V1\UpdateStoryRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Filters\V1\StoryFilter;
 use App\Repository\Story\StoryRepositoryInterface;
 
 class StoryController extends ApiController
@@ -37,8 +38,8 @@ class StoryController extends ApiController
         return $this->storyRepository->find($id, $hasAuthHeader);
     }
 
-    public function index()
+    public function index(StoryFilter $filters)
     {
-        return $this->storyRepository->all();
+        return $this->storyRepository->all($filters);
     }
 }

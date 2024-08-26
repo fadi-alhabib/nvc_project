@@ -2,6 +2,7 @@
 
 namespace App\Repository\Story;
 
+use App\Http\Filters\V1\StoryFilter;
 
 interface StoryRepositoryInterface
 {
@@ -13,5 +14,5 @@ interface StoryRepositoryInterface
 
     public function find($id, $hasAuthHeader);
 
-    public function all();
+    public function all(StoryFilter $filters);
 }
