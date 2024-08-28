@@ -3,6 +3,13 @@
 namespace App\Http\Filters\V1;
 
 class StoryFilter extends QueryFilter{
+    protected $sortable = [
+        'clicks',
+        'teller',
+        'title',
+        'createdAt' => 'created_at'
+    ];
+
 
     public function clicks($value){
         $values = explode(',', $value);
@@ -36,5 +43,7 @@ class StoryFilter extends QueryFilter{
 
         return $this->builder->where('created_at', $dates);
     }
+
+    
 
 }
