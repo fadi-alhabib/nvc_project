@@ -9,7 +9,6 @@ abstract class QueryFilter{
     protected $builder;
     protected $request;
 
-
     public function __construct(Request $request)
     {
         $this->request = $request;
@@ -25,7 +24,6 @@ abstract class QueryFilter{
         return $this->builder;
     }    
 
-
     public function apply(Builder $builder){
         $this->builder = $builder;
 
@@ -34,7 +32,6 @@ abstract class QueryFilter{
                 $this->$key($value);
             }
         }
-
 
         return $builder;
     }

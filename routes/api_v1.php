@@ -16,6 +16,7 @@ Route::resource('stories', StoryController::class);
 Route::resource('states', StateController::class);
 Route::resource('tags', TagController::class);
 Route::resource('states.stories', StateStoryController::class);
+Route::resource('tags.stories', StateStoryController::class);
 
 
 // create => GET
