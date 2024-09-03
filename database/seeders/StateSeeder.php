@@ -15,7 +15,7 @@ class StateSeeder extends Seeder
         \App\Models\State::factory()->create([
             'name' => 'دمشق'
         ]);
-
+//test
         \App\Models\State::factory()->create([
             'name' => 'حمص'
         ]);
