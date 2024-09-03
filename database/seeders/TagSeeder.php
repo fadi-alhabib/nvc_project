@@ -13,27 +13,27 @@ class TagSeeder extends Seeder
     public function run(): void
     {
         \App\Models\Tag::factory()->create([
-            'name' => 'Empowerment'
+            'name' => 'تمكين'
         ]);
 
         \App\Models\Tag::factory()->create([
-            'name' => 'Forgiveness'
+            'name' => 'مسامحة'
         ]);
 
         \App\Models\Tag::factory()->create([
-            'name' => 'Problem solving'
+            'name' => 'حل مشاكل'
         ]);
 
         \App\Models\Tag::factory()->create([
-            'name' => 'History & Heritage'
+            'name' => 'تاريخ وتراث'
         ]);
 
         \App\Models\Tag::factory()->create([
-            'name' => 'Bridge building'
+            'name' => 'بناء الجسور'
         ]);
 
         \App\Models\Tag::factory()->create([
-            'name' => 'Inner peace'
+            'name' => 'سلام داخلي'
         ]);
     }
 }

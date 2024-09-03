@@ -13,59 +13,59 @@ class StateSeeder extends Seeder
     public function run(): void
     {
         \App\Models\State::factory()->create([
-            'name' => 'Damascus'
+            'name' => 'دمشق'
         ]);
 
         \App\Models\State::factory()->create([
-            'name' => 'Homs'
+            'name' => 'حمص'
         ]);
 
         \App\Models\State::factory()->create([
-            'name' => 'Tartous'
+            'name' => 'طرطوس'
         ]);
 
         \App\Models\State::factory()->create([
-            'name' => 'Lattakia'
+            'name' => 'اللاذقية'
         ]);
 
         \App\Models\State::factory()->create([
-            'name' => 'Aleppo'
+            'name' => 'حلب'
         ]);
 
         \App\Models\State::factory()->create([
-            'name' => 'Deir Ezzor'
+            'name' => 'دير الزور'
         ]);
 
         \App\Models\State::factory()->create([
-            'name' => 'Rif Dimashq'
+            'name' => 'ريف دمشق'
         ]);
 
         \App\Models\State::factory()->create([
-            'name' => 'Quneitra'
+            'name' => 'القنيطرة'
         ]);
 
         \App\Models\State::factory()->create([
-            'name' => 'Idleb'
+            'name' => 'إدلب'
         ]);
 
         \App\Models\State::factory()->create([
-            'name' => 'Sweida'
+            'name' => 'السويداء'
         ]);
 
         \App\Models\State::factory()->create([
-            'name' => 'Daraa'
+            'name' => 'درعا'
         ]);
 
         \App\Models\State::factory()->create([
-            'name' => 'al Raqqa'
+            'name' => 'الرقة'
         ]);
 
         \App\Models\State::factory()->create([
-            'name' => 'al Hasaka'
+            'name' => 'الحسكة'
         ]);
 
         \App\Models\State::factory()->create([
-            'name' => 'Hama'
+            'name' => 'حماة'
         ]);
     }
 }
