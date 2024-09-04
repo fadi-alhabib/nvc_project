@@ -19,6 +19,10 @@ class StoryFilter extends QueryFilter{
         return $this->builder->where('clicks', $values);
     }
 
+    public function state($value){
+        return $this->builder->where('state_id', $value);
+    }
+
     public function title($value){
         $likeStr = str_replace('*', '%', $value);
         return $this->builder->where('title', 'like', $likeStr);
@@ -44,6 +48,9 @@ class StoryFilter extends QueryFilter{
         return $this->builder->where('created_at', $dates);
     }
 
-    
-
+    public function tag($value){
+        return $this->builder->whereHas('tags', function($query) use ($value) {
+            $query->where('tags.id', $value);
+        });
+    }
 }
