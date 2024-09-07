@@ -7,9 +7,11 @@ use App\Http\Requests\Api\V1\UpdateStoryRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Filters\V1\StoryFilter;
 use App\Repository\Story\StoryRepositoryInterface;
+use App\Traits\ApiResponses;
 
 class StoryController extends ApiController
 {
+    use ApiResponses;
     public function __construct(protected StoryRepositoryInterface $storyRepository)
     {
         $this->middleware('auth:sanctum')->only('create', 'update', 'edit', 'destroy');
@@ -17,17 +19,20 @@ class StoryController extends ApiController
         
     public function create(CreateStoryRequest $data)
     {
-        return $this->storyRepository->create($data->toArray());
+        $newStory = $this->storyRepository->create($data->toArray());
+        return $this->createdAt('story created', route('stories.show', ['story' => $newStory->id]));
     }
 
     public function update(UpdateStoryRequest $data, $id)
     {
-       return $this->storyRepository->update($data->toArray(), $id);
+       $this->storyRepository->update($data->toArray(), $id);
+       return $this->noContent();
     }
 
     public function destroy($id)
     {
-        return $this->storyRepository->delete($id);
+        $this->storyRepository->delete($id);
+        return  $this->noContent();
     }
 
     public function show($id)
@@ -35,11 +40,13 @@ class StoryController extends ApiController
         if(request()->header('Authorization')) $hasAuthHeader = true;
         else $hasAuthHeader = false;
         
-        return $this->storyRepository->find($id, $hasAuthHeader);
+        $story = $this->storyRepository->find($id, $hasAuthHeader);
+        return $this->ok('Retrieved successfully', $story); 
     }
 
     public function index(StoryFilter $filters)
     {
-        return $this->storyRepository->all($filters);
+        $stories = $this->storyRepository->all($filters);
+        return $this->ok('Retrieved successfully', $stories); 
     }
 }

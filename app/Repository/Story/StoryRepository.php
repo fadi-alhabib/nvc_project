@@ -10,7 +10,6 @@ use App\Traits\ApiResponses;
 
 class StoryRepository implements StoryRepositoryInterface
 {
-    use ApiResponses;
     public function create(array $data)
     {
         $story = [
@@ -24,7 +23,7 @@ class StoryRepository implements StoryRepositoryInterface
         
         $newStory = Story::create($story);
         $newStory->tags()->attach($story['tags']);
-        return $this->createdAt('Created successfuly', route('stories.show', ['story' => $newStory->id]));
+        return $newStory;
     }
 
     public function update(array $data, $id)
@@ -33,7 +32,6 @@ class StoryRepository implements StoryRepositoryInterface
         $story->update($data);
         if($data['tags'])
             $story->tags()->sync($data['tags']);
-        return $this->noContent();
     }
 
     public function delete($id)
@@ -41,7 +39,7 @@ class StoryRepository implements StoryRepositoryInterface
         $story = Story::find($id);
         $story->tags()->detach();
         $story->delete();
-        return  $this->noContent();
+        
     }
 
     public function find($id, $hasAuthHeader)
