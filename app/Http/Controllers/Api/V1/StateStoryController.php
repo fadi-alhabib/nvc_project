@@ -13,7 +13,7 @@ class StateStoryController extends Controller
     public function index($state_id, StoryFilter $filters)
     {
         return StoryResource::collection(
-            Story::where('state_id', $state_id)->filter($filters)->paginate()
+            Story::where('state_id', $state_id)->filter($filters)->get()
         );
     }
 }

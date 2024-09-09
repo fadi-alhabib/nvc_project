@@ -19,20 +19,16 @@ class StoryResource extends JsonResource
             'id' => $this->id,
             'attributes' => [
                 'title' => $this->title,
-                'body' => $this->when(
-                    $request->routeIs('stories.show'),
-                    $this->body
-                ),
+                'body' => $this->body,
                 'teller' => $this->teller,
                 'clicks' => $this->clicks,
                 'created_at' => $this->created_at
             ],
             'link' => $this->when(
-                    $request->routeIs('stories'),
-                    route('stories.show', $this->id)
-                )
-            ,
-            'relationships' =>[
+                $request->routeIs('stories'),
+                route('stories.show', $this->id)
+            ),
+            'relationships' => [
                 'place' => [
                     'data' => [
                         'type' => 'state',

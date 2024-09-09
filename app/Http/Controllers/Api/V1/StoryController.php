@@ -17,7 +17,7 @@ class StoryController extends ApiController
         $this->middleware('auth:sanctum')->only('store', 'update', 'edit', 'destroy');
     }
 
-    public function create(CreateStoryRequest $data)
+    public function store(CreateStoryRequest $data)
     {
         $newStory = $this->storyRepository->create($data->input());
         return $this->createdAt('story created', route('stories.show', ['story' => $newStory->id]));
