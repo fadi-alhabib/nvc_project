@@ -4,7 +4,7 @@ namespace App\Repository\Story;
 
 use App\Models\Story;
 use App\Models\Tag;
-use App\Http\Filters\V1\StoryFilter; 
+use App\Http\Filters\V1\StoryFilter;
 use App\Http\Resources\V1\StoryResource;
 use App\Traits\ApiResponses;
 
@@ -20,7 +20,7 @@ class StoryRepository implements StoryRepositoryInterface
             'keywords' => $data['keywords'],
             'tags' => $data['tags']
         ];
-        
+
         $newStory = Story::create($story);
         $newStory->tags()->attach($story['tags']);
         return $newStory;
@@ -30,7 +30,7 @@ class StoryRepository implements StoryRepositoryInterface
     {
         $story = Story::find($id);
         $story->update($data);
-        if($data['tags'])
+        if ($data['tags'])
             $story->tags()->sync($data['tags']);
     }
 
@@ -39,21 +39,20 @@ class StoryRepository implements StoryRepositoryInterface
         $story = Story::find($id);
         $story->tags()->detach();
         $story->delete();
-        
     }
 
     public function find($id, $hasAuthHeader)
     {
         $story = Story::find($id);
-        if(!$hasAuthHeader){
+        if (!$hasAuthHeader) {
             $story->clicks++;
             $story->save();
         }
-        
+
         return new StoryResource($story);
     }
 
-    
+
     public function all(StoryFilter $filters)
     {
         return StoryResource::collection(Story::filter($filters)->paginate());

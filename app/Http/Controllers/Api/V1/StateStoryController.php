@@ -10,7 +10,8 @@ use Illuminate\Http\Request;
 
 class StateStoryController extends Controller
 {
-    public function index($state_id, StoryFilter $filters){
+    public function index($state_id, StoryFilter $filters)
+    {
         return StoryResource::collection(
             Story::where('state_id', $state_id)->filter($filters)->paginate()
         );

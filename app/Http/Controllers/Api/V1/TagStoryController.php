@@ -11,7 +11,8 @@ use App\Models\Tag;
 
 class TagStoryController extends Controller
 {
-    public function index($tag_id, StoryFilter $filters){
+    public function index($tag_id, StoryFilter $filters)
+    {
         $stories = Tag::find($tag_id)->stories();
         return StoryResource::collection($stories->filter($filters)->paginate());
     }
