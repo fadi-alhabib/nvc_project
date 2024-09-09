@@ -28,20 +28,20 @@ class StoryFilter extends QueryFilter
 
     public function title($value)
     {
-        // $likeStr = str_replace('*', '%', $value);
-        return $this->builder->where('title', 'like', "%" . $value . "%");
+        $likeStr = str_replace('*', '%', $value);
+        return $this->builder->where('title', 'like', $likeStr);
     }
 
     public function body($value)
     {
-        // $likeStr = str_replace('*', '%', $value);
-        return $this->builder->where('body', 'like', "%" . $value . "%");
+        $likeStr = str_replace('*', '%', $value);
+        return $this->builder->where('body', 'like', $likeStr);
     }
 
     public function teller($value)
     {
-        // $likeStr = str_replace('*', '%', $value);
-        return $this->builder->where('teller', 'like', "%" . $value . "%");
+        $likeStr = str_replace('*', '%', $value);
+        return $this->builder->where('teller', 'like', $likeStr);
     }
 
     public function createdAt($value)
