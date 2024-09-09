@@ -11,18 +11,9 @@ use App\Traits\ApiResponses;
 class StoryRepository implements StoryRepositoryInterface
 {
     public function create(array $data)
-    {
-        $story = [
-            'state_id' => $data['state_id'],
-            'title' => $data['title'],
-            'body' => $data['body'],
-            'teller' => $data['teller'],
-            'keywords' => $data['keywords'],
-            'tags' => $data['tags']
-        ];
-        
-        $newStory = Story::create($story);
-        $newStory->tags()->attach($story['tags']);
+    {   
+        $newStory = Story::create($data);
+        $newStory->tags()->attach($data['tags']);
         return $newStory;
     }
 
